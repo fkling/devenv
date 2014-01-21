@@ -21,7 +21,7 @@ fi
 
 #setup server root
 rm -rf /var/www
-ln -fs /vagrant /var/www
+ln -fs /projects /var/www
 
 # tools
 npm install -g jshint
