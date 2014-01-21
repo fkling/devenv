@@ -1,0 +1,5 @@
+Bundle 'mattn/emmet-vim'
+Bundle 'Syntastic'
+Bundle 'dwm.vim'
+Bundle 'surround.vim'
+Bundle 'altercation/vim-colors-solarized'

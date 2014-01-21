@@ -1,0 +1,21 @@
+[user]
+	name = Felix Kling
+	email = felix.kling@gmx.net
+[color]
+	status = auto
+	branch = auto
+	ui = true
+	diff = auto
+[core]
+	excludesfile = /Users/kling/.gitignore_global
+	editor = /usr/bin/vim
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[alias]
+	unstage = reset HEAD --
+	last = log -1 HEAD
+[push]
+	default = simple
+[credential]
+	helper = osxkeychain

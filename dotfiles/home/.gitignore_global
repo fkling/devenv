@@ -1,0 +1,17 @@
+# Mac OS #
+.DS_Store
+
+# Editor files #
+*.kpf
+
+# Temporary files #
+# Vim
+.*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+# Compiled
+#*.zip
+*.pyc
