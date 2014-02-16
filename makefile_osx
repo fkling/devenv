@@ -1,0 +1,48 @@
+# BASE
+P = /usr/local/bin
+HOMEBREW = $(P)/brew
+
+export P
+
+#APPS
+ITERM = /Applications/iTerm.app
+ITERM_URL = 'http://iterm2.com/downloads/stable/iTerm2_v1_0_0.zip'
+
+APPS = $(ITERM)
+
+# TOOLS
+TOOLS := node vim python git encfs wget
+TOOLS := $(TOOLS:%=$(P)/%)
+
+# Other stuff
+
+## Source Code Pro font
+FONTDIR = $(HOME)/Library/Fonts
+SCP = $(FONTDIR)/SourceCodePro*
+SCP_URL = 'http://downloads.sourceforge.net/project/sourcecodepro.adobe/SourceCodePro_FontsOnly-1.017.zip'
+
+# TARGETS
+
+all: $(TOOLS) $(SCP) $(APPS)
+	$(MAKE) -f makefile_common -L
+
+
+$(TOOLS): $(P)/%: $(HOMEBREW)
+	brew install $*
+
+$(HOMEBREW):
+	ruby -e "$$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+
+$(ITERM): $(P)/wget
+	wget -O iterm.zip $(ITERM_URL)
+	unzip -f iterm.zip -d /Applications
+	touch $(ITERM)
+	rm iterm.zip
+
+
+$(SCP): $(P)/wget
+	wget -O SourceCodePro.zip $(SCP_URL)
+	mkdir -p $(FONTDIR)
+	unzip -jo SourceCodePro.zip *.otf  -d $(FONTDIR)
+	touch $(SCP)
+	rm SourceCodePro.zip

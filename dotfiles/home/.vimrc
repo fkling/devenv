@@ -25,6 +25,7 @@ set showcmd "show incomplete cmds down the bottom
 set showmode "show current mode down the bottom
 
 set number "show line numbers
+set hidden "keep buffers in memory
 
 "display tabs and trailing spaces
 set list
