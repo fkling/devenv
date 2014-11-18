@@ -18,3 +18,7 @@ Session.vim
 
 #other stuff
 .vagrant
+
+# Node
+/node_modules
+npm-debug.log

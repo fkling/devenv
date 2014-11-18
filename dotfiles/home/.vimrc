@@ -1,142 +1,292 @@
-set shell=/bin/sh
 "This must be first, because it changes other options as a side effect.
 set nocompatible
 
 " Vundle init
 filetype off                  " required!
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
 " Include bundles
 source ~/.vim_bundles
 
-"allow backspacing over everything in insert mode
-set backspace=indent,eol,start
+call vundle#end()
 
-"always show status line
-set laststatus=2
+" Set a mapleader.
+let mapleader=','
 
-"store lots of :cmdline history
-set history=1000
 
-set showcmd "show incomplete cmds down the bottom
-set showmode "show current mode down the bottom
+""""""""""""""""""""""""""""""""""""""""""
+" General
+""""""""""""""""""""""""""""""""""""""""""
+" Display.
+set ruler " show cursor coordinates
+set title " show filename
+set number " show line numbers
+set showcmd " show normal mode commands as they are entered
+set showmode " show editing mode in status line
+set showmatch " flash matching delimiters
 
-set number "show line numbers
-set hidden "keep buffers in memory
+set cc=81 " Mark column 81
+set cursorline
 
-"display tabs and trailing spaces
-set list
+set nolist " no metacharacters
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅,eol:¬
 
-set incsearch "find the next match as we type the search
-set hlsearch "hilight searches by default
+" Autocomplete.
+set wildmode=longest,list,full
+set wildmenu
+set wildignore+=*.o,*.pyc,*.aux,*.cmi,*.cmo,*.cmx
+set completeopt=menu,menuone,preview
 
-set wrap "dont wrap lines
+" Search.
+set nohlsearch " don't persist search highlighting
+set incsearch " search with a typeahead
+set magic " use (some) regexp special characters
+set ignorecase " ignore case...
+set smartcase " ...iff all characters are lower case
+set infercase " case-sensitive completion
+
+" Scrolling.
+set wrap " wrap overlong lines
+set scrolloff=0 " don't scroll unless necessary
+set scrolljump=5 " scroll five lines at a time
 set linebreak "wrap lines at convenient points
 
+" Turn things off.
+set nofoldenable " no folding
+set mouse= " no mouse
+set noerrorbells " no error bells
+set vb t_vb= " no visual bells
 
-"load ftplugins and indent files
-filetype plugin on
-filetype indent on
+" Backspace over everything.
+set backspace=indent,eol,start
 
-"turn on syntax highlighting
-syntax on
+" Get rid of security holes.
+set nomodeline
+set modelines=0
 
-"set colorscheme
+
+""""""""""""""""""""""""""""""""""""""""""
+" Syntax highlighting and indent
+""""""""""""""""""""""""""""""""""""""""""
+" Turn on syntax highlighting and enable filetype stuff.
+syntax enable
+filetype plugin indent on
+
+" Use solarized for color.
+" set t_Co=16
 set background=light
 colorscheme solarized
 
-" For coding
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set expandtab
-set number
-set ruler
-set autoindent
+" Tab and indent.
+set autoindent " carry indent over to new lines
+set shiftwidth=2 " two spaces per indent
+set tabstop=2 " number of spaces per tab when viewing
+set softtabstop=2 " number of spaces per tab when inserting
+set expandtab " sub spaces for tabs
+set smarttab " make tab key obey indent rules specified above
 
-"statusline setup
-set statusline =%#identifier#
-set statusline+=[%f] "path of the filename
-set statusline+=%*
+" Highlight trailing whitespace.
+hi ExtraWhitespace ctermbg=red guibg=red
+au ColorScheme * hi ExtraWhitespace guibg=red
+au BufEnter * match ExtraWhitespace /\s\+$/
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhiteSpace /\s\+$/
 
-"display a warning if fileformat isnt unix
-set statusline+=%#warningmsg#
-set statusline+=%{&ff!='unix'?'['.&ff.']':''}
-set statusline+=%*
+""""""""""""""""""""""""""""""""""""""""""
+" Cache and backups
+""""""""""""""""""""""""""""""""""""""""""
 
-""display a warning if file encoding isnt utf-8
-set statusline+=%#warningmsg#
-set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
-set statusline+=%*
+" Save marks for ' files, registers for " files, and : lines of history.
+set viminfo='20,"20,:50
 
-set statusline+=%h "help file flag
-set statusline+=%y "filetype
+" History and undo caches.
+set history=50 " not too much history
+set undolevels=1000 " lots of undo!
 
-"read only flag
-set statusline+=%#identifier#
-set statusline+=%r
-set statusline+=%*
+" Keep backup junk out of cwd.
+set directory=~/tmp//,/tmp//,.
+set backupdir=~/tmp//,/tmp//,.
 
-""modified flag
-set statusline+=%#identifier#
-set statusline+=%m
-set statusline+=%*
+" Save cursor position for reopening.
+au BufReadPost *
+  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+  \ exe "normal! g'\"" |
+  \ endif
 
-" Mark column 81
-set cc=81
-set cursorline
 
-" Syntastic
-let g:syntastic_javascript_checkers=['jshint']
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+""""""""""""""""""""""""""""""""""""""""""
+" Buffers and windows
+""""""""""""""""""""""""""""""""""""""""""
 
-" misc
-set exrc            " enable per-directory .vimrc files
-set secure          " disable unsafe commands in local .vimrc files
+" Settings.
+set hidden " keep hidden buffers around
+set autoread " automatically re-read modified files
+set splitright " hsplit to the right
+set splitbelow " vsplit to the left
+set laststatus=2 " always show a status line
 
-" Better gep
-set grepprg=grep\ -nH\ $*
+" Window navigation.
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-h> <C-w>h
+noremap <C-l> <C-w>l
 
-"Fix for terminal
-imap <C-@> <C-Space>
-"make <c-space> clear the highlight as well as redraw
-nnoremap <Space> :nohls<CR><Space>
-inoremap <C-Space> <C-O>:nohls<CR>
+" Buffer navigation.
+nnoremap <C-n> :bnext<CR>
+nnoremap <C-p> :bprev<CR>
 
-"<S-T> to trim line endings
-nmap <S-T> :%s/\s\+$//<CR>
+" Quickfix and preview windows.
+nnoremap <leader>co :copen<CR>
+nnoremap <leader>cc :cclose<CR>
+nnoremap <leader>zz :pclose<CR>
 
-"map Q to something useful
-noremap Q gq
 
-"make Y consistent with C and D
+""""""""""""""""""""""""""""""""""""""""""
+" Maps
+""""""""""""""""""""""""""""""""""""""""""
+
+" Switch modes more easily.
+nnoremap ; :
+inoremap jk <Esc>
+inoremap kjk <Esc>
+
+" Make Y behave more like other operators.
 nnoremap Y y$
 
-let mapleader=","
-inoremap <leader>, <C-N>
+" Make Q formatting; replace Ex mode with <leader>q.
+noremap Q gq
+nnoremap <leader>q Q
+
+" Replace <C-a> to accommodate screen escape character.
+inoremap <C-z> <C-a>
+nnoremap <leader>a <C-a>
+nnoremap <leader>x <C-x>
+
+" Move by display line rather than file line.
+nnoremap j gj
+nnoremap k gk
+
+" Jump to matching delimiters more easily.
+nnoremap <leader><Tab> %
+vnoremap <leader><Tab> %
+
+" Jump to next or previous error
+nnoremap [[ :lnext<CR>
+nnoremap ]] :lprev<CR>
+
+" Other useful leader maps.
+nnoremap <leader>m :make<CR>
+nnoremap <leader>l <C-l>
+nnoremap <leader>v <C-w>v
 
 " edit and load vimrc
 nnoremap <leader>ev :vsp $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" map esc key
-inoremap jk <esc>
+" Toggle spellchecking and paste.
+nnoremap <leader>s :setl spell!<CR>:setl spell?<CR>
+nnoremap <leader>p :setl paste!<CR>:setl paste?<CR>
+nnoremap <leader>t :setl list!<CR>:setl list?<CR>
 
-" easy tabs
-nnoremap H :tabp<cr>
-nnoremap L :tabn<cr>
-nnoremap T :tabe<cr>
-" open split in new tab
-nnoremap eT :tabe %<cr>:tabp<cr>:q<cr>:tabn<cr>
+" Remove trailing whitespace.
+nnoremap <silent> <leader>w :%s/\s\+$//<CR>:let @/=''<CR>''
 
-"Since we have a custom status line, we have to add the ruler options
-set statusline+=%=%-14.(%l,%c%V%)\ %P
+" Convert filetype to unix.
+nnoremap <leader>ff :e ++ff=dos<CR>:setlocal ff=unix<CR>
 
-"Add spellcheck
+" Fewer fat fingers.
+noremap ZZ <C-z>
+
+" Only cabbrev actual commands (rather than also, say, search terms).
+fu! SingleQuote(str)
+  return "'" . substitute(copy(a:str), "'", "''", 'g') . "'"
+endfu
+fu! Cabbrev(key, value)
+  exe printf('cabbrev <expr> %s (getcmdtype() == ":" && getcmdpos() <= %d) ? %s : %s',
+    \ a:key, 1+len(a:key), SingleQuote(a:value), SingleQuote(a:key))
+endfu
+
+""""""""""""""""""""""""""""""""""""""""""
+" Tags
+""""""""""""""""""""""""""""""""""""""""""
+
+" Search up the directory tree for tags.
+set tags=tags;/
+
+" Use cscope along with ctags if it's available.
+if has("cscope")
+  " Defer to ctags.
+  set cscopetagorder=1
+
+  " Use :cstag instead of :tag and friends (<C-]>, etc.).
+  set cscopetag
+
+  " Add cscope databases in `pwd` or in $CSCOPE_DB.
+  set nocscopeverbose
+  if filereadable("cscope.out")
+    cs add cscope.out
+  elseif $CSCOPE_DB != ""
+    cs add $CSCOPE_DB
+  endif
+  set cscopeverbose
+else
+  " Use :tjump behavior for :tag and friends even without cscope.
+  call Cabbrev('tag', 'tjump')
+  nnoremap <C-]> g<C-]>
+  vnoremap <C-]> g<C-]>
+  nnoremap <C-W>] <C-W>g<C-]>
+  endif
+
+command! -nargs=1 -complete=tag Vstag vsp | tag <args>
+call Cabbrev('vstag', 'Vstag')
+
+""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+""""""""""""""""""""""""""""""""""""""""""
+
+" Airline - Use powerline glyphs.
+let g:airline_powerline_fonts=1
+
+" Syntastic
+let g:syntastic_javascript_checkers=['jsxhint']
+let g:syntastic_always_populate_loc_list=1
+
+
+""""""""""""""""""""""""""""""""""""""""""
+" Miscellaneous
+""""""""""""""""""""""""""""""""""""""""""
+
+" Use skeletal template files.
+au! BufNewFile * silent! 0r ~/.vim/skel/template.%:e
+
+" Set language defaults.
+let g:tex_flavor='latex'
+let g:sql_type_default='mysql'
+
+" Set maximum line length.
+au FileType liquid,markdown,readme,tex,text setl tw=79
+
+" Kill any trailing whitespace on save.
+fu! <SID>StripTrailingWhitespaces()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+endfu
+au FileType c,cabal,cpp,haskell,javascript,ocaml,php,python,ruby,readme,tex,text
+  \ au BufWritePre <buffer>
+  \ :call <SID>StripTrailingWhitespaces()
+
+" enable per-directory .vimrc files
+set exrc
+" disable unsafe commands in local .vimrc files
+set secure
+
+" Better gep
+set grepprg=grep\ -nH\ $*
+
+"set spellcheck
 set spell spelllang=en_us
