@@ -6,7 +6,7 @@ filetype off                  " required!
 let mapleader=","
 
 " Required
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 source ~/.vim_bundles
 call vundle#end()
