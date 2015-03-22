@@ -17,6 +17,8 @@
 	last = log -1 HEAD
 	graph = log --graph --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %s %C(magenta bold)(%cr)%Creset %C(cyan)<%aN>%Creset'
 	amend = commit --amend -v
+	co = checkout
+	st = status
 [push]
 	default = simple
 [credential]
