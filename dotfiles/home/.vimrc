@@ -1,21 +1,15 @@
 "This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" Vundle init
+set nocompatible               " Be iMproved
 filetype off                  " required!
-set rtp+=~/.vim/bundle/vundle/
+let mapleader=","
+
+" Required
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-
-" Include bundles
 source ~/.vim_bundles
-
 call vundle#end()
-
-" Set a mapleader.
-let mapleader=','
-
 
 """"""""""""""""""""""""""""""""""""""""""
 " General
@@ -32,7 +26,7 @@ set cc=81 " Mark column 81
 set cursorline
 
 set nolist " no metacharacters
-set listchars=tab:▷⋅,trail:⋅,nbsp:⋅,eol:¬
+set listchars=tab:»·,trail:·,eol:¬ " tabs, trailing ws, eol character
 
 " Autocomplete.
 set wildmode=longest,list,full
@@ -95,6 +89,7 @@ au BufEnter * match ExtraWhitespace /\s\+$/
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhiteSpace /\s\+$/
 
+
 """"""""""""""""""""""""""""""""""""""""""
 " Cache and backups
 """"""""""""""""""""""""""""""""""""""""""
@@ -103,8 +98,8 @@ au InsertLeave * match ExtraWhiteSpace /\s\+$/
 set viminfo='20,"20,:50
 
 " History and undo caches.
-set history=50 " not too much history
-set undolevels=1000 " lots of undo!
+set history=50        " not too much history
+set undolevels=1000   " lots of undo!
 
 " Keep backup junk out of cwd.
 set directory=~/tmp//,/tmp//,.
@@ -113,7 +108,7 @@ set backupdir=~/tmp//,/tmp//,.
 " Save cursor position for reopening.
 au BufReadPost *
   \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-  \ exe "normal! g'\"" |
+  \   exe "normal! g'\"" |
   \ endif
 
 
@@ -122,11 +117,11 @@ au BufReadPost *
 """"""""""""""""""""""""""""""""""""""""""
 
 " Settings.
-set hidden " keep hidden buffers around
-set autoread " automatically re-read modified files
-set splitright " hsplit to the right
-set splitbelow " vsplit to the left
-set laststatus=2 " always show a status line
+set hidden            " keep hidden buffers around
+set noautoread          " no automatically re-read modified files
+set splitright        " hsplit to the right
+set splitbelow        " vsplit to the left
+set laststatus=2      " always show a status line
 
 " Window navigation.
 noremap <C-j> <C-w>j
@@ -157,7 +152,7 @@ inoremap kjk <Esc>
 nnoremap Y y$
 
 " Make Q formatting; replace Ex mode with <leader>q.
-noremap Q gq
+noremap  Q gq
 nnoremap <leader>q Q
 
 " Replace <C-a> to accommodate screen escape character.
@@ -175,30 +170,28 @@ vnoremap <leader><Tab> %
 
 " Jump to next or previous error
 nnoremap [[ :lnext<CR>
-nnoremap ]] :lprev<CR>
+nnoremap ]] :lprevious<CR>
 
 " Other useful leader maps.
-nnoremap <leader>m :make<CR>
-nnoremap <leader>l <C-l>
-nnoremap <leader>v <C-w>v
-
-" edit and load vimrc
-nnoremap <leader>ev :vsp $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>m  :make<CR>
+nnoremap <leader>l  <C-l>
+nnoremap <leader>v  <C-w>v
 
 " Toggle spellchecking and paste.
-nnoremap <leader>s :setl spell!<CR>:setl spell?<CR>
-nnoremap <leader>p :setl paste!<CR>:setl paste?<CR>
-nnoremap <leader>t :setl list!<CR>:setl list?<CR>
+nnoremap <leader>s  :setl spell!<CR>:setl spell?<CR>
+nnoremap <leader>p  :setl paste!<CR>:setl paste?<CR>
+nnoremap <leader>t  :setl list!<CR>:setl list?<CR>
+nnoremap <leader>n  :setl number!<CR>:setl number?<CR>
 
 " Remove trailing whitespace.
 nnoremap <silent> <leader>w :%s/\s\+$//<CR>:let @/=''<CR>''
 
 " Convert filetype to unix.
 nnoremap <leader>ff :e ++ff=dos<CR>:setlocal ff=unix<CR>
-
-" Fewer fat fingers.
-noremap ZZ <C-z>
+"
+" Edit and reload vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Only cabbrev actual commands (rather than also, say, search terms).
 fu! SingleQuote(str)
@@ -208,6 +201,7 @@ fu! Cabbrev(key, value)
   exe printf('cabbrev <expr> %s (getcmdtype() == ":" && getcmdpos() <= %d) ? %s : %s',
     \ a:key, 1+len(a:key), SingleQuote(a:value), SingleQuote(a:key))
 endfu
+
 
 """"""""""""""""""""""""""""""""""""""""""
 " Tags
@@ -238,10 +232,11 @@ else
   nnoremap <C-]> g<C-]>
   vnoremap <C-]> g<C-]>
   nnoremap <C-W>] <C-W>g<C-]>
-  endif
+endif
 
 command! -nargs=1 -complete=tag Vstag vsp | tag <args>
 call Cabbrev('vstag', 'Vstag')
+
 
 """"""""""""""""""""""""""""""""""""""""""
 " Plugins
@@ -252,15 +247,19 @@ let g:airline_powerline_fonts=1
 
 " Syntastic
 let g:syntastic_javascript_checkers=['jsxhint']
-let g:syntastic_always_populate_loc_list=1
+" let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+
+" signify
+let g:signify_vcs_list = [ 'hg', 'git' ]
 
 
 """"""""""""""""""""""""""""""""""""""""""
 " Miscellaneous
 """"""""""""""""""""""""""""""""""""""""""
-
-" Use skeletal template files.
-au! BufNewFile * silent! 0r ~/.vim/skel/template.%:e
 
 " Set language defaults.
 let g:tex_flavor='latex'
@@ -288,5 +287,7 @@ set secure
 " Better gep
 set grepprg=grep\ -nH\ $*
 
-"set spellcheck
+" signify
+let g:signify_vcs_list = [ 'hg', 'git' ]
+
 set spell spelllang=en_us

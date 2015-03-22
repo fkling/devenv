@@ -8,14 +8,22 @@
 	diff = auto
 [core]
 	excludesfile = ~/.gitignore_global
-	editor = /usr/bin/vim
+	editor = /usr/local/bin/vim
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [alias]
 	unstage = reset HEAD --
 	last = log -1 HEAD
+	graph = log --graph --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %s %C(magenta bold)(%cr)%Creset %C(cyan)<%aN>%Creset'
+	amend = commit --amend -v
 [push]
 	default = simple
 [credential]
 	helper = osxkeychain
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
+[log]
+	decorate = short
