@@ -1,6 +1,7 @@
 tap 'caskroom/cask'
 tap 'homebrew/brewdler'
 brew 'bash-completion'
+brew 'brew-cask'
 brew 'flow'
 brew 'git'
 brew 'node'

@@ -1,0 +1,15 @@
+alias :e=vim
+alias :qa=exit
+alias :sp='test -n "$TMUX" && tmux split-window'
+alias :vs='test -n "$TMUX" && tmux split-window -h'
+alias :wq=exit
+alias cd..='cd ..'
+alias e=exit
+alias g=git
+alias groot='cd $(git rev-parse --show-toplevel 2> /dev/null || echo -n ".")'
+alias l='ls -lF'
+alias ll='ls -laF'
+alias s=ssh
+alias serve='python -m SimpleHTTPServer' # optional arg: port (defaults to 8000)
+alias t=tmux
+alias v=vim
