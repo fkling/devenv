@@ -8,11 +8,8 @@ DOTFILE_NAMES := $(filter-out . .. %.swp, $(DOTFILE_NAMES:dotfiles/home/%=%))
 DOTFILES := $(DOTFILE_NAMES:%=$(HOME)/%)
 
 # NPM
-NPM_MODULES := jshint
+NPM_MODULES := jsxhint
 NPM_MODULES := $(MODULES:%=$(P)/%)
-
-NPM_MODULES_CLI := grunt
-NPM_MODULES_CLI := $(NPM_MODULES_CLI:%=$(P)/%)
 
 #PIP
 PYTHON_PACKAGES := ipython

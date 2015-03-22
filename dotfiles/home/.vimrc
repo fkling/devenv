@@ -1,142 +1,270 @@
-set shell=/bin/sh
-"This must be first, because it changes other options as a side effect.
-set nocompatible
+" source $ADMIN_SCRIPTS/master.vimrc
 
-" Vundle init
+set nocompatible               " Be iMproved
 filetype off                  " required!
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+let mapleader=","
 
-" Include bundles
+" Required
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 source ~/.vim_bundles
+call vundle#end()
 
-"allow backspacing over everything in insert mode
+""""""""""""""""""""""""""""""""""""""""""
+" General
+""""""""""""""""""""""""""""""""""""""""""
+
+" Display
+
+set cursorline        " Highlight line of the cursor
+set ruler             " show cursor coordinates
+set title             " show filename
+set number            " show numbers
+set showcmd           " show normal mode commands as they are entered
+set showmode          " show editing mode in status line
+set showmatch         " flash matching delimiters
+set cc=81             " Show vertical line at column 81
+
+set nolist            " hide meta characters
+set listchars=tab:»·,trail:·,eol:¬ " tabs, trailing ws, eol character
+
+set statusline=%F%m%r%h%w\ [%{&ff}][%Y][%p%%]%=%c,%l/%L
+
+" Autocomplete.
+set wildmode=longest,list,full
+set wildmenu
+set wildignore+=*.o,*.pyc,*.aux,*.cmi,*.cmo,*.cmx
+set completeopt=menu,menuone,preview
+
+" Search
+set nohlsearch        " don't persist search highlighting
+set incsearch         " search with a typeahead
+set magic             " use (some) regexp special characters
+set ignorecase        " ignore case...
+set smartcase         " ...iff all characters are lower case
+set infercase         " case-sensitive completion
+
+" Turn things off.
+set nofoldenable      " no folding
+set mouse=            " no mouse
+set noerrorbells      " no error bells
+set vb t_vb=          " no visual bells
+
+" Backspace over everything.
 set backspace=indent,eol,start
 
-"always show status line
-set laststatus=2
-
-"store lots of :cmdline history
-set history=1000
-
-set showcmd "show incomplete cmds down the bottom
-set showmode "show current mode down the bottom
-
-set number "show line numbers
-set hidden "keep buffers in memory
-
-"display tabs and trailing spaces
-set list
-set listchars=tab:▷⋅,trail:⋅,nbsp:⋅,eol:¬
-
-set incsearch "find the next match as we type the search
-set hlsearch "hilight searches by default
-
-set wrap "dont wrap lines
-set linebreak "wrap lines at convenient points
+" Get rid of security holes.
+set nomodeline
+set modelines=0
 
 
-"load ftplugins and indent files
-filetype plugin on
-filetype indent on
+""""""""""""""""""""""""""""""""""""""""""
+" Syntax highlighting and indent
+""""""""""""""""""""""""""""""""""""""""""
 
-"turn on syntax highlighting
-syntax on
+" Turn on syntax highlighting and enable filetype stuff.
+syntax enable
+filetype plugin indent on
 
-"set colorscheme
+" Use solarized for color
 set background=light
 colorscheme solarized
 
-" For coding
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set expandtab
-set number
-set ruler
-set autoindent
+" Tab and ident
+set autoindent        " carry indent over to new lines
+set shiftwidth=2      " two spaces per indent
+set tabstop=2         " number of spaces per tab when viewing
+set softtabstop=2     " number of spaces per tab when inserting
+set expandtab         " sub spaces for tabs
+set smarttab          " make tab key obey indent rules specified above
 
-"statusline setup
-set statusline =%#identifier#
-set statusline+=[%f] "path of the filename
-set statusline+=%*
+" Highlight trailing whitespace.
+hi ExtraWhitespace ctermbg=red guibg=red
+au ColorScheme * hi ExtraWhitespace guibg=red
+au BufEnter * match ExtraWhitespace /\s\+$/
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhiteSpace /\s\+$/
 
-"display a warning if fileformat isnt unix
-set statusline+=%#warningmsg#
-set statusline+=%{&ff!='unix'?'['.&ff.']':''}
-set statusline+=%*
 
-""display a warning if file encoding isnt utf-8
-set statusline+=%#warningmsg#
-set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
-set statusline+=%*
 
-set statusline+=%h "help file flag
-set statusline+=%y "filetype
+""""""""""""""""""""""""""""""""""""""""""
+" Cache and backups
+""""""""""""""""""""""""""""""""""""""""""
 
-"read only flag
-set statusline+=%#identifier#
-set statusline+=%r
-set statusline+=%*
+" Save marks for ' files, registers for " files, and : lines of history.
+set viminfo='20,"20,:50
 
-""modified flag
-set statusline+=%#identifier#
-set statusline+=%m
-set statusline+=%*
+" History and undo caches.
+set history=50        " not too much history
+set undolevels=1000   " lots of undo!
 
-" Mark column 81
-set cc=81
-set cursorline
+" Keep backup junk out of cwd.
+set directory=~/tmp//,/tmp//,.
+set backupdir=~/tmp//,/tmp//,.
 
-" Syntastic
-let g:syntastic_javascript_checkers=['jshint']
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" Save cursor position for reopening.
+au BufReadPost *
+  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+  \   exe "normal! g'\"" |
+  \ endif
 
-" misc
-set exrc            " enable per-directory .vimrc files
-set secure          " disable unsafe commands in local .vimrc files
 
-" Better gep
-set grepprg=grep\ -nH\ $*
+""""""""""""""""""""""""""""""""""""""""""
+" Buffers and windows
+""""""""""""""""""""""""""""""""""""""""""
 
-"Fix for terminal
-imap <C-@> <C-Space>
-"make <c-space> clear the highlight as well as redraw
-nnoremap <Space> :nohls<CR><Space>
-inoremap <C-Space> <C-O>:nohls<CR>
+" Settings.
+set hidden            " keep hidden buffers around
+set noautoread          " no automatically re-read modified files
+set splitright        " hsplit to the right
+set splitbelow        " vsplit to the left
+set laststatus=2      " always show a status line
 
-"<S-T> to trim line endings
-nmap <S-T> :%s/\s\+$//<CR>
+" Window navigation.
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-h> <C-w>h
+noremap <C-l> <C-w>l
 
-"map Q to something useful
-noremap Q gq
+" Buffer navigation.
+nnoremap <C-n> :bnext<CR>
+nnoremap <C-p> :bprev<CR>
 
-"make Y consistent with C and D
+" Quickfix and preview windows.
+nnoremap <leader>co :copen<CR>
+nnoremap <leader>cc :cclose<CR>
+nnoremap <leader>zz :pclose<CR>
+
+""""""""""""""""""""""""""""""""""""""""""
+" Maps
+""""""""""""""""""""""""""""""""""""""""""
+
+" Switch modes more easily.
+nnoremap ; :
+inoremap jk <Esc>
+inoremap kjk <Esc>
+
+" Make Y behave more like other operators.
 nnoremap Y y$
 
-let mapleader=","
-inoremap <leader>, <C-N>
+" Make Q formatting; replace Ex mode with <leader>q.
+noremap  Q gq
+nnoremap <leader>q Q
 
-" edit and load vimrc
-nnoremap <leader>ev :vsp $MYVIMRC<cr>
+" Replace <C-a> to accommodate screen escape character.
+inoremap <C-z> <C-a>
+nnoremap <leader>a <C-a>
+nnoremap <leader>x <C-x>
+
+" Move by display line rather than file line.
+nnoremap j gj
+nnoremap k gk
+
+" Jump to matching delimiters more easily.
+nnoremap <leader><Tab> %
+vnoremap <leader><Tab> %
+
+" Jump to next or previous error
+nnoremap [[ :lnext<CR>
+nnoremap ]] :lprevious<CR>
+
+" Other useful leader maps.
+nnoremap <leader>m  :make<CR>
+nnoremap <leader>l  <C-l>
+nnoremap <leader>v  <C-w>v
+
+" Toggle spellchecking and paste.
+nnoremap <leader>s  :setl spell!<CR>:setl spell?<CR>
+nnoremap <leader>p  :setl paste!<CR>:setl paste?<CR>
+nnoremap <leader>t  :setl list!<CR>:setl list?<CR>
+nnoremap <leader>n  :setl number!<CR>:setl number?<CR>
+
+" Remove trailing whitespace.
+nnoremap <silent> <leader>w :%s/\s\+$//<CR>:let @/=''<CR>''
+
+" Convert filetype to unix.
+nnoremap <leader>ff :e ++ff=dos<CR>:setlocal ff=unix<CR>
+"
+" Edit and reload vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" map esc key
-inoremap jk <esc>
+" Only cabbrev actual commands (rather than also, say, search terms).
+fu! SingleQuote(str)
+  return "'" . substitute(copy(a:str), "'", "''", 'g') . "'"
+endfu
+fu! Cabbrev(key, value)
+  exe printf('cabbrev <expr> %s (getcmdtype() == ":" && getcmdpos() <= %d) ? %s : %s',
+    \ a:key, 1+len(a:key), SingleQuote(a:value), SingleQuote(a:key))
+endfu
 
-" easy tabs
-nnoremap H :tabp<cr>
-nnoremap L :tabn<cr>
-nnoremap T :tabe<cr>
-" open split in new tab
-nnoremap eT :tabe %<cr>:tabp<cr>:q<cr>:tabn<cr>
 
-"Since we have a custom status line, we have to add the ruler options
-set statusline+=%=%-14.(%l,%c%V%)\ %P
+""""""""""""""""""""""""""""""""""""""""""
+" Tags
+""""""""""""""""""""""""""""""""""""""""""
 
-"Add spellcheck
+" Search up the directory tree for tags.
+set tags=tags;/
+
+" Use cscope along with ctags if it's available.
+if has("cscope")
+  " Defer to ctags.
+  set cscopetagorder=1
+
+  " Use :cstag instead of :tag and friends (<C-]>, etc.).
+  set cscopetag
+
+  " Add cscope databases in `pwd` or in $CSCOPE_DB.
+  set nocscopeverbose
+  if filereadable("cscope.out")
+    cs add cscope.out
+  elseif $CSCOPE_DB != ""
+    cs add $CSCOPE_DB
+  endif
+  set cscopeverbose
+else
+  " Use :tjump behavior for :tag and friends even without cscope.
+  call Cabbrev('tag', 'tjump')
+  nnoremap <C-]> g<C-]>
+  vnoremap <C-]> g<C-]>
+  nnoremap <C-W>] <C-W>g<C-]>
+endif
+
+command! -nargs=1 -complete=tag Vstag vsp | tag <args>
+call Cabbrev('vstag', 'Vstag')
+
+
+""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+""""""""""""""""""""""""""""""""""""""""""
+
+" Airline - Use powerline glyphs.
+let g:airline_powerline_fonts=1
+
+" syntastic
+let g:syntastic_javascript_checkers = ['jsxhint']
+let g:syntastic_php_checkers=['php']
+" let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+
+" signify
+let g:signify_vcs_list = [ 'hg', 'git' ]
+
+" TBGS
+command! -nargs=+ T TBGS <args>
+command! -nargs=+ TM TBGS @providesModule <args>
+command! -nargs=+ TC TBGS class <args>
+
+""""""""""""""""""""""""""""""""""""""""""
+" File Types
+""""""""""""""""""""""""""""""""""""""""""
+
+au FileType text setl tw=80 lbr
+
+""""""""""""""""""""""""""""""""""""""""""
+" Miscellaneous
+""""""""""""""""""""""""""""""""""""""""""
 set spell spelllang=en_us
