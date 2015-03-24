@@ -25,6 +25,8 @@
 	default = simple
 [credential]
 	helper = osxkeychain
+[credential "https://github.com/"]
+  username = fkling
 [filter "hawser"]
 	clean = git hawser clean %f
 	smudge = git hawser smudge %f
