@@ -7,9 +7,13 @@ Bundle 'mattn/emmet-vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
 Plugin 'mhinz/vim-signify'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'haya14busa/incsearch.vim'
 
 "Browse
 Bundle 'sjbach/lusty'
+Bundle 'sjl/gundo.vim'
 
 " Color
 Plugin 'altercation/vim-colors-solarized'

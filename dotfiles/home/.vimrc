@@ -202,6 +202,10 @@ fu! Cabbrev(key, value)
     \ a:key, 1+len(a:key), SingleQuote(a:value), SingleQuote(a:key))
 endfu
 
+" Plugins
+" Open gundo
+nnoremap <leader>u :GundoToggle<CR>
+
 
 """"""""""""""""""""""""""""""""""""""""""
 " Tags
@@ -254,8 +258,17 @@ let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
 
 " signify
-let g:signify_vcs_list = [ 'hg', 'git' ]
+let  g:signify_vcs_list = [ 'hg', 'git' ]
 
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" incsearch
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
 
 """"""""""""""""""""""""""""""""""""""""""
 " Miscellaneous
@@ -291,3 +304,10 @@ set grepprg=grep\ -nH\ $*
 let g:signify_vcs_list = [ 'hg', 'git' ]
 
 set spell spelllang=en_us
+
+""""""""""""""""""""""""""""""""""""""""""
+" Local settings
+""""""""""""""""""""""""""""""""""""""""""
+if (filereadable(glob("~/.vimrc.local")))
+  source ~/.vimrc.local
+endif
