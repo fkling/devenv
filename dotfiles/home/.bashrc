@@ -86,9 +86,13 @@ OPENTITLEBAR="\033]0;"
 CLOSETITLEBAR="\007"
 trap 'printf "${OPENTITLEBAR}`history 1 | cut -b8- | sed 's/%/%%/g'`${CLOSETITLEBAR}"' DEBUG
 
+has_brew=$(command_exists brew)
+
 ## Completions
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
+if [ -n "$has_brew" ]; then
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+  fi
 fi
 
 # whereis completes on commands
@@ -97,8 +101,10 @@ fi
 complete -c command whereis
 
 ## nvm
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+if [ -n "$has_brew" ]; then
+  export NVM_DIR=~/.nvm
+  source $(brew --prefix nvm)/nvm.sh
+fi
 
 ## Load host specific bash settings
 test -f ~/.bashrc.local && source ~/.bashrc.local

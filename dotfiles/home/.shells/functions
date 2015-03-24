@@ -103,3 +103,8 @@ regmv()
     shift
   done
 }
+
+# Tests whether a given executable exists
+command_exists () {
+  type "$1" 2> /dev/null ;
+}
