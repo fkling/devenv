@@ -31,3 +31,6 @@
 	required = true
 [log]
 	decorate = short
+
+[include]
+  path = ~/.gitconfig.local
