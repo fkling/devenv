@@ -17,9 +17,10 @@
 	last = log -1 HEAD
 	graph = log --graph --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %s %C(magenta bold)(%cr)%Creset %C(cyan)<%aN>%Creset'
 	amend = commit --amend -v
-  fixup = commit --amend -C HEAD
+  fixup = !git add -u && git commit --amend -C HEAD
 	co = checkout
 	st = status
+	rewrite = rebase -i
 [push]
 	default = simple
 [credential]
