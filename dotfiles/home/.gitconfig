@@ -21,6 +21,7 @@
 	co = checkout
 	st = status
 	rewrite = rebase -i
+	po = push origin
 [push]
 	default = simple
 [credential]
