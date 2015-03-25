@@ -1,4 +1,14 @@
 ## Functions
+
+# bump version in npm modules with standard commit message
+bumpv()
+{
+  if [ -z "$1" ]; then
+    echo "You have to specify which part of the version to bump"
+  fi
+  npm version $1 -m "Bump version to %s for publishing"
+}
+
 # grep for "TODO" string
 todo()
 {
