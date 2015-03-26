@@ -61,6 +61,10 @@ set backspace=indent,eol,start
 set nomodeline
 set modelines=0
 
+" Add mouse support
+set mouse=a
+set ttymouse=xterm2
+
 
 """"""""""""""""""""""""""""""""""""""""""
 " Syntax highlighting and indent
