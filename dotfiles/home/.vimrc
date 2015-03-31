@@ -311,6 +311,10 @@ let g:signify_vcs_list = [ 'hg', 'git' ]
 
 set spell spelllang=en_us
 
+" clipper
+nnoremap <leader>y :call system('nc localhost 8377', @0)<CR>
+
+
 """"""""""""""""""""""""""""""""""""""""""
 " Local settings
 """"""""""""""""""""""""""""""""""""""""""
