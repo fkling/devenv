@@ -21,3 +21,7 @@ Plugin 'altercation/vim-colors-solarized'
 
 " Status bar
 Plugin 'bling/vim-airline'
+
+if (filereadable(glob("~/.vim_bundles.local")))
+  source ~/.vim_bundles.local
+endif
