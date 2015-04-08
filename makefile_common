@@ -8,13 +8,12 @@ DOTFILE_NAMES := $(filter-out . .. %.swp, $(DOTFILE_NAMES:dotfiles/home/%=%))
 DOTFILES := $(DOTFILE_NAMES:%=$(HOME)/%)
 
 # NPM
-NPM_MODULES := jsxhint
-NPM_MODULES := $(MODULES:%=$(P)/%)
+NPM_MODULES := eslint babel-eslint
+NPM_MODULES := $(NPM_MODULES:%=$(P)/%)
 
 #PIP
 PYTHON_PACKAGES := ipython
 PYTHON_PACKAGES := $(PYTHON_PACKAGES:%=$(P)/%)
-#
 
 all: $(VUNDLE) $(DOTFILES) $(NPM_MODULES) $(NPM_MODULES_CLI) $(PYTHON_PACKAGES)
 

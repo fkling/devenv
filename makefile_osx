@@ -29,4 +29,3 @@ $(SCP): $(P)/wget
 	mkdir -p $(FONTDIR)
 	unzip -jo SourceCodePro.zip *.otf  -d $(FONTDIR)
 	touch $(SCP)
-	rm SourceCodePro.zip
