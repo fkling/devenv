@@ -255,7 +255,7 @@ call Cabbrev('vstag', 'Vstag')
 let g:airline_powerline_fonts=1
 
 " Syntastic
-let g:syntastic_javascript_checkers=['jsxhint']
+let g:syntastic_javascript_checkers=['eslint', 'jsxhint']
 let g:syntastic_javascript_jsxhint_args = '--harmony'
 let g:syntastic_php_checkers=['php']
 " let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
