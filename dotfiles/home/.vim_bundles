@@ -11,16 +11,22 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'haya14busa/incsearch.vim'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'marijnh/tern_for_vim'
+
 
 "Browse
 Bundle 'sjbach/lusty'
 Bundle 'sjl/gundo.vim'
+Bundle 'scrooloose/nerdtree'
 
 " Color
 Plugin 'altercation/vim-colors-solarized'
 
 " Status bar
 Plugin 'bling/vim-airline'
+
+" Misc
+Bundle 'ervandew/supertab'
 
 if (filereadable(glob("~/.vim_bundles.local")))
   source ~/.vim_bundles.local

@@ -267,15 +267,25 @@ let g:syntastic_always_populate_loc_list = 1
 " signify
 let  g:signify_vcs_list = [ 'git' ]
 
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
 
 " incsearch
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
+
+" NerdTree
+noremap <leader>b :NERDTreeToggle<CR>
+
 
 """"""""""""""""""""""""""""""""""""""""""
 " Miscellaneous
