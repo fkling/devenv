@@ -106,5 +106,8 @@ if [ -n "$has_brew" ]; then
   source $(brew --prefix nvm)/nvm.sh
 fi
 
+## vi mode for bash
+set -o vi
+
 ## Load host specific bash settings
 test -f ~/.bashrc.local && source ~/.bashrc.local
