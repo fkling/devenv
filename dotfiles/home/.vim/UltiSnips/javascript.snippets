@@ -83,6 +83,22 @@ console.log(${1});
 endsnippet
 
 #
+# ES6
+#
+
+snippet import "import declaration" b
+import ${1:module} from '$3${2:$1}$4';
+endsnippet
+
+snippet import* "import all declaration" b
+import * as ${1:module} from '$3${2:$1}$4';
+endsnippet
+
+snippet import{ "import {} declaration" b
+import \{$1\} from '$2';
+endsnippet
+
+#
 # other
 #
 

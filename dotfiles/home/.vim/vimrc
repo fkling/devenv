@@ -331,7 +331,13 @@ let g:CommandTMaxCachedDirectories = 10
 let g:CommandTMaxFiles             = 500000
 let g:CommandTMaxHeight            = 30
 let g:CommandTScanDotDirectories   = 1
-let g:CommandTFileScanner          = 'watchman'
+let g:CommandTWildIgnore = &wildignore .
+      \ ",**/.git/*" .
+      \ ",**/.hg/*" .
+      \ ",**/bower_components/*" .
+      \ ",**/node_modules/*"
+      \ ",**/tmp/*"
+nnoremap <silent> <leader>lr :CommandT %:h<cr>
 nnoremap <silent> <leader>lf :CommandT<cr>
 nnoremap <silent> <leader>lb :CommandTMRU<cr>
 

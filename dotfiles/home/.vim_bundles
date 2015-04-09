@@ -14,7 +14,7 @@ Plugin 'Valloric/YouCompleteMe'
 
 
 "Browse
-" Bundle 'sjbach/lusty'
+Bundle 'wincent/command-t'
 Bundle 'sjl/gundo.vim'
 Bundle 'scrooloose/nerdtree'
 
