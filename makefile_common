@@ -15,13 +15,13 @@ NPM_MODULES := $(NPM_MODULES:%=$(P)/%)
 PYTHON_PACKAGES := ipython
 PYTHON_PACKAGES := $(PYTHON_PACKAGES:%=$(P)/%)
 
-all: $(VUNDLE) $(DOTFILES) $(NPM_MODULES) $(NPM_MODULES_CLI) $(PYTHON_PACKAGES)
+all: $(DOTFILES) $(VUNDLE) $(NPM_MODULES) $(NPM_MODULES_CLI) $(PYTHON_PACKAGES)
 
 dotfiles: $(DOTFILES)
 
 $(VUNDLE):
 	mkdir -p $(VUNDLE)
-	git clone $VUNDLE_REP $VUNDLE
+	git clone $(VUNDLE_REP) $(VUNDLE)
 	echo "Don't forget to run BundleInstall!"
 
 $(DOTFILES): $(HOME)/%:

@@ -8,14 +8,13 @@ Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
 Plugin 'mhinz/vim-signify'
 Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
 Plugin 'haya14busa/incsearch.vim'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'marijnh/tern_for_vim'
+" Plugin 'marijnh/tern_for_vim'
 
 
 "Browse
-Bundle 'sjbach/lusty'
+" Bundle 'sjbach/lusty'
 Bundle 'sjl/gundo.vim'
 Bundle 'scrooloose/nerdtree'
 
