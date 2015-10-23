@@ -109,5 +109,8 @@ fi
 ## vi mode for bash
 set -o vi
 
+## editor
+export EDITOR="vim"
+
 ## Load host specific bash settings
 test -f ~/.bashrc.local && source ~/.bashrc.local
