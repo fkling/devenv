@@ -1,20 +1,26 @@
 ---
-- name: homebrew | download Homebrew install script
+- name: download Homebrew install script
   get_url:
     url=https://raw.githubusercontent.com/Homebrew/install/master/install
     dest=vendor/homebrew/install
 
-- name: homebrew | install Homebrew
+- name: install Homebrew
   command: ruby vendor/homebrew/install creates=/usr/local/bin/brew
 
-- name: homebrew | update Homebrew
+- name: update Homebrew
   homebrew: update_homebrew=yes
 
-- name: homebrew | tap bundle
-  homebrew_tap: tap=homebrew/bundle state=present
+- name: taps
+  homebrew_tap: "tap={{ item }}"
+  with_items: taps
 
-- name: homebrew | bundle
-  command: brew bundle chdir=roles/homebrew/files
+- name: brews
+  homebrew: "name={{ item }}"
+  with_items: brews
+
+- name: casks
+  homebrew_cask: "name={{ item }}"
+  with_items: casks
 
 - name: homebrew | clean up old versions
   command: brew cleanup

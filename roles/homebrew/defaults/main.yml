@@ -1,0 +1,32 @@
+taps:
+  - caskroom/cask
+  - homebrew/fuse
+brews:
+  - brew-cask
+  - clipper
+  - encfs
+  - git
+  - node
+  - nvm
+  - python
+  - tmux
+  - vim
+  - wget
+casks:
+  - alfred
+  - atom
+  - bartender
+  - daisydisk
+  - flux
+  - flux
+  - gpgtools
+  - hocus-focus
+  - iterm2
+  - marked
+  - monodraw
+  - nvalt
+  - osxfuse
+  - qlcolorcode
+  - qlmarkdown
+  - quicklook-json
+  - spectacle
