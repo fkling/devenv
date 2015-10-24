@@ -1,0 +1,30 @@
+- name: vim | Install Vundle
+  git: repo=https://github.com/gmarik/vundle.git
+       dest=~/.vim/bundle/vundle
+       update=no
+       depth=1
+  register: vundle_installed
+
+- name: vim | Initialize Vundle
+  command: vim -s roles/vim/files/install_bundles
+  when: vundle_installed.changed
+
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "vars/{{ ansible_distribution }}.yml"
+    - "vars/default.yml"
+
+- name: vim | configure Command-T
+  command:
+    ruby extconf.rb
+    creates={{ command_t_base }}/ruby/command-t/Makefile
+    chdir={{ command_t_base }}/ruby/command-t
+
+- name: vim | compile Command-T
+  command:
+    make
+    creates={{ command_t_base }}/ruby/command-t/{{ command_t_bundle }}
+    chdir={{ command_t_base }}/ruby/command-t
+
+- name: vim | install YouCompleteMe
+  command: ./install.sh chdir={{ you_complete_me_base }}

@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  roles:
+    - role: dotfiles
+      tags: ['dotfiles']
+    - role: homebrew
+      tags: ['homebrew']
+      when: "ansible_distribution == 'Darwin'"
+    - role: npm
+      tags: ['npm']
+    - role: vim
+      tags: ['vim']

@@ -1,0 +1,6 @@
+[submodule "vendor/ansible"]
+	path = vendor/ansible
+	url = https://github.com/ansible/ansible.git
+[submodule "vendor/virtualenv"]
+	path = vendor/virtualenv
+	url = https://github.com/pypa/virtualenv.git

@@ -1,0 +1,4 @@
+---
+packages:
+  - eslint
+  - babel-eslint

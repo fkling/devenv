@@ -1,0 +1,12 @@
+---
+dotfiles:
+  - .bash_profile
+  - .bashrc
+  - .eslintrc
+  - .gitconfig
+  - .gitignore_global
+  - .jshintrc
+  - .shells
+  - .tmux.conf
+  - .vim
+  - .vim_bundles
