@@ -187,6 +187,7 @@ nnoremap <leader>p  :setl paste!<CR>:setl paste?<CR>
 nnoremap <leader>c  :setl list!<CR>:setl list?<CR>
 nnoremap <leader>n  :setl number!<CR>:setl number?<CR>
 nnoremap <leader>N  :setl relativenumber!<CR>
+noremap <leader>r :%s/<c-r><c-w>/
 
 " Remove trailing whitespace.
 nnoremap <silent> <leader>w :%s/\s\+$//<CR>:let @/=''<CR>''
