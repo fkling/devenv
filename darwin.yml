@@ -5,7 +5,7 @@
       tags: ['dotfiles']
     - role: homebrew
       tags: ['homebrew']
-      when: "ansible_distribution == 'Darwin'"
+      when: "ansible_distribution == 'MacOSX'"
     - role: npm
       tags: ['npm']
     - role: vim
