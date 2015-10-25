@@ -10,3 +10,4 @@ dotfiles:
   - .tmux.conf
   - .vim
   - .vim_bundles
+  - .zshrc

@@ -14,5 +14,4 @@ alias serve='python -m SimpleHTTPServer' # optional arg: port (defaults to 8000)
 alias t=tmux
 alias v=vim
 alias clip="nc localhost 8377"
-alias to="todo.sh -d ~/.todo.cfg"
 alias findwomod='find . -not -path "*/node_modules/*"'
