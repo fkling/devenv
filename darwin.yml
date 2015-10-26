@@ -3,6 +3,8 @@
   roles:
     - role: dotfiles
       tags: ['dotfiles']
+    - role: shell
+      tags: ['shell']
     - role: homebrew
       tags: ['homebrew']
       when: "ansible_distribution == 'MacOSX'"

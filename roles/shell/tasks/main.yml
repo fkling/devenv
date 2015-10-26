@@ -1,0 +1,16 @@
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "vars/{{ ansible_distribution }}.yml"
+    - "vars/default.yml"
+
+- name: zsh is allowed
+  lineinfile: dest=/etc/shells line={{ zsh_path }}
+  become: true
+
+- name: Determine current shell
+  command: echo $SHELL
+  register: current_shell
+
+- name: Set shell to zsh
+  shell: "chsh -s $(command -v zsh)"
+  when: current_shell.stdout.find('/zsh') == -1
