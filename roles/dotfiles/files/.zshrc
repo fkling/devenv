@@ -7,8 +7,6 @@ bindkey -v
 # The following lines were added by compinstall
 zstyle :compinstall filename '/Users/fkling/.zshrc'
 
-autoload -Uz compinit
-compinit
 # End of lines added by compinstall
 
 #
@@ -151,3 +149,6 @@ function update-hostname() {
     HOSTNAME=""
   fi
 }
+
+autoload -Uz compinit
+compinit
