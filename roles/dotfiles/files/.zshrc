@@ -20,6 +20,7 @@ colors
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git hg
 zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:hg:*' get-bookmarks true
 zstyle ':vcs_info:*' stagedstr " %{$fg[green]%}●%{$reset_color%}" # default 'S'
 zstyle ':vcs_info:*' unstagedstr " %{$fg[red]%}●%{$reset_color%}" # default 'U'
 zstyle ':vcs_info:*' formats '[%b%m%c%u] ' # default ' (%s)-[%b]%c%u-'
@@ -96,7 +97,12 @@ has_homebrew=$(command -v brew)
 if [ -n "$has_homebrew" ]; then
   export NVM_DIR=~/.nvm
   source $(brew --prefix nvm)/nvm.sh
+elif [ -f ~/.nvm/nvm.sh ]; then
+  export NVM_DIR=~/.nvm
+  source ~/.nvm/nvm.sh
 fi
+
+
 
 ## vi mode for bash
 set -o vi
