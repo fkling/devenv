@@ -23,6 +23,7 @@ Plugin 'altercation/vim-colors-solarized'
 
 " Status bar
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " Misc
 Bundle 'ervandew/supertab'
