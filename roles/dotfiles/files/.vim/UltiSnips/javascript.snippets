@@ -3,11 +3,21 @@
 #
 
 snippet cc "createClass" b
-var ${1:`!p snip.rv = re.sub('\.react$', '', snip.basename or 'ModuleName')`} = React.createClass({
+const ${1:`!p snip.rv = re.sub('\.react$', '', snip.basename or 'ModuleName')`} = React.createClass({
 	render: function() {
 		$0
 	}
 });
+
+module.exports = $1;
+endsnippet
+
+snippet ccls "class ... extends ..." b
+class ${1:`!p snip.rv = re.sub('\.react$', '', snip.basename or 'ModuleName')`} extends React.Component {
+	render() {
+		$0
+	}
+}
 
 module.exports = $1;
 endsnippet
@@ -127,7 +137,7 @@ ${2:'use strict';
 endsnippet
 
 snippet req "require" !b
-var ${1:ModuleName} = require('$1${2}');
+const ${1:ModuleName} = require('$1${2}');
 endsnippet
 
 snippet esen "eslint enable"

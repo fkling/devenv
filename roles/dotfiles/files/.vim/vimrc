@@ -148,9 +148,9 @@ nnoremap <leader>zz :pclose<CR>
 """"""""""""""""""""""""""""""""""""""""""
 
 " Switch modes more easily.
-nnoremap ; :
-inoremap jk <Esc>
-inoremap kjk <Esc>
+" nnoremap ; :
+" inoremap jk <Esc>
+" inoremap kjk <Esc>
 
 " Make Y behave more like other operators.
 nnoremap Y y$
