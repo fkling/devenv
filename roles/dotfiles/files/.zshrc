@@ -111,6 +111,10 @@ set -o vi
 ## editor
 export EDITOR="vim"
 
+# more completion
+if [[ -n "$has_homebrew" ]];  then
+  fpath=(/usr/local/share/zsh-completions $fpath)
+fi
 
 #
 # Hooks
@@ -151,6 +155,13 @@ add-zsh-hook precmd vcs_info
 
 # include local files
 test -f ~/.zshrc.local && source ~/.zshrc.local
+function update-hostname() {
+  if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
+    HOSTNAME="`whoami`@`hostname -s` "
+  else
+    HOSTNAME=""
+  fi
+}
 
 autoload -Uz compinit
 compinit
