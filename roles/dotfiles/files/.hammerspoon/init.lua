@@ -40,17 +40,17 @@ hs.hotkey.bind(leader, "f", function()
   win:fullscreen()
 end)
 
--- Center (or fullscreen)
+-- Center
 hs.hotkey.bind(leader, "c", function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.w = (max.w < f.w) and max.w * 0.95 or f.w
-  f.h = (max.h < f.h) and max.h * 0.95 or f.h
-  f.x = (max.w < f.w) and max.x or ((max.w - f.w) / 2)
-  f.y = (max.h < f.h) and max.h or ((max.h - f.h) / 2)
+  f.w = max.w * 0.65
+  f.h = max.h * 0.8
+  f.x = ((max.w - f.w) / 2)
+  f.y = ((max.h - f.h) / 2)
   win:setFrame(f)
 end)
 
