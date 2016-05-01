@@ -18,8 +18,8 @@ casks:
   - bartender
   - daisydisk
   - flux
-  - flux
   - gpgtools
+  - hammerspoon
   - hocus-focus
   - iterm2
   - marked
@@ -29,4 +29,3 @@ casks:
   - qlcolorcode
   - qlmarkdown
   - quicklook-json
-  - spectacle
