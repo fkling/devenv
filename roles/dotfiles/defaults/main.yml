@@ -5,6 +5,7 @@ dotfiles:
   - .eslintrc
   - .gitconfig
   - .gitignore_global
+  - .hammerspoon
   - .jshintrc
   - .shells
   - .tmux.conf
