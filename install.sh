@@ -80,8 +80,8 @@ fi
 
 source $VIRTUALENV_ACTIVATE
 
-if [[ -z $(pip show paramiko PyYAML Jinja2 httplib2) || $FORCE ]]; then
-  if ! pip install paramiko PyYAML Jinja2 httplib2 six &> $DEV_NULL; then
+if [[ -z $(pip show paramiko PyYAML Jinja2 httplib2 pycrypto) || $FORCE ]]; then
+  if ! pip install paramiko PyYAML Jinja2 httplib2 six pycrypto &> $DEV_NULL; then
     echo "Failed: pip install"
     echo "Did you forget to 'export https_proxy=fwdproxy:8080' or similar?"
     exit 1
