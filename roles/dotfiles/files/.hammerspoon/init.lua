@@ -1,58 +1,75 @@
 local leader = {"cmd", "alt", "ctrl"}
 
+hs.grid.setGrid('8x8');
+hs.grid.MARGINX = 0
+hs.grid.MARGINY = 0
 hs.window.animationDuration = 0
+
+local grid = {
+  rightHalf = '2,0 4x8',
+  leftHalf = '0,0 4x8',
+  fullScreen = '0,0 8x8',
+  centered = '1,1 6x6',
+}
 
 --
 -- Window management
 --
 
--- Align left
-hs.hotkey.bind(leader, "Left", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
+-- Chain the specified movement commands.
+--
+-- This is like the "chain" feature in Slate, but with a couple of enhancements:
+--
+--  - Chains always start on the screen the window is currently on.
+--  - A chain will be reset after 2 seconds of inactivity, or on switching from
+--    one chain to another, or on switching from one app to another, or from one
+--    window to another.
+--
+function chain(movements)
+  local chainResetInterval = 2 -- seconds
+  local cycleLength = #movements
+  local sequenceNumber = 1
 
-  f.x = max.x
-  f.y = max.y
-  f.w = max.w / 2
-  f.h = max.h
-  win:setFrame(f)
-end)
+  return function()
+    local win = hs.window.frontmostWindow()
+    local id = win:id()
+    local now = hs.timer.secondsSinceEpoch()
+    local screen = win:screen()
+
+    if
+      lastSeenChain ~= movements or
+      lastSeenAt < now - chainResetInterval or
+      lastSeenWindow ~= id
+    then
+      sequenceNumber = 1
+      lastSeenChain = movements
+    elseif (sequenceNumber == 1) then
+      -- At end of chain, restart chain on next screen.
+      screen = screen:next()
+    end
+    lastSeenAt = now
+    lastSeenWindow = id
+
+    hs.grid.set(win, movements[sequenceNumber], screen)
+    sequenceNumber = sequenceNumber % cycleLength + 1
+  end
+end
+
+-- Align left
+hs.hotkey.bind(leader, "Left", chain({
+	grid.leftHalf,
+}))
 
 -- Align right
-hs.hotkey.bind(leader, "Right", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
+hs.hotkey.bind(leader, "Right", chain({
+	grid.rightHalf,
+}))
 
-  f.x = max.x + (max.w / 2)
-  f.y = max.y
-  f.w = max.w / 2
-  f.h = max.h
-  win:setFrame(f)
-end)
-
--- Fullscreen
-hs.hotkey.bind(leader, "f", function()
-  local win = hs.window.focusedWindow()
-  win:fullscreen()
-end)
-
--- Center
-hs.hotkey.bind(leader, "c", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.w = max.w * 0.65
-  f.h = max.h * 0.8
-  f.x = ((max.w - f.w) / 2)
-  f.y = ((max.h - f.h) / 2)
-  win:setFrame(f)
-end)
+-- Fullscreen / center
+hs.hotkey.bind(leader, "f", chain({
+  grid.fullScreen,
+  grid.centered,
+}))
 
 -- Hide all
 hs.hotkey.bind(leader, "h", function()
@@ -99,18 +116,6 @@ end)
 -------------------------
 ---- HERE BE DRAGONS ----
 -------------------------
-
-function hs.window.fullscreen(win)
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.x = max.x
-  f.y = max.y
-  f.w = max.w
-  f.h = max.h
-  win:setFrame(f)
-end
 
 function has_value (tab, val)
   for index, value in ipairs (tab) do
