@@ -6,7 +6,7 @@ hs.grid.MARGINY = 0
 hs.window.animationDuration = 0
 
 local grid = {
-  rightHalf = '2,0 4x8',
+  rightHalf = '4,0 4x8',
   leftHalf = '0,0 4x8',
   fullScreen = '0,0 8x8',
   centered = '1,1 6x6',
