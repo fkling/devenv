@@ -12,7 +12,6 @@ Plugin 'haya14busa/incsearch.vim'
 Plugin 'Valloric/YouCompleteMe'
 " Plugin 'marijnh/tern_for_vim'
 
-
 "Browse
 Bundle 'wincent/command-t'
 Bundle 'sjl/gundo.vim'
@@ -26,7 +25,7 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 " Misc
-Bundle 'ervandew/supertab'
+" Bundle 'ervandew/supertab'
 
 if (filereadable(glob("~/.vim_bundles.local")))
   source ~/.vim_bundles.local
