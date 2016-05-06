@@ -1,0 +1,8 @@
+- name: clone / update nvm
+  git: repo=https://github.com/creationix/nvm.git
+       dest={{ansible_env.HOME}}/.nvm
+
+- name: checkout latest release
+  shell: git checkout $(git describe --abbrev=0 --tags)
+  args:
+    chdir: "{{ansible_env.HOME}}/.nvm"

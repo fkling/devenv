@@ -7,3 +7,5 @@
       tags: ['vim']
     - role: tmux
       tags: ['tmux']
+    - role: nvm
+      tags: ['nvm']
