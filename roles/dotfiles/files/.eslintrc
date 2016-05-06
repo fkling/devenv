@@ -1,6 +1,23 @@
-{
-  "parser": "babel-eslint",
-  "rules": {
-    "quotes": [1, "single", "avoid-escape"],
-  }
-}
+parser: babel-eslint
+env:
+  node: true
+  browser: true
+plugins:
+  - react
+rules:
+  arrow-spacing: 2
+  comma-dangle: [1, "always-multiline"]
+  indent: [2, 2, {SwitchCase: 1}]
+  no-undef: 2
+  no-unused-vars:
+    - 2
+    - varsIgnorePattern: '^_$'
+      argsIgnorePattern: '^_$'
+  no-redeclare: 2
+  quotes: [1, "single", "avoid-escape"]
+  semi: [2, "always"]
+  space-after-keywords: 2
+  space-before-blocks: 2
+  react/jsx-no-undef: 1
+  react/jsx-uses-react: 1
+  react/react-in-jsx-scope: 2
