@@ -124,18 +124,6 @@ function${1: name}(${2:arg}) {
 }
 endsnippet
 
-snippet pm "@providesModule declaration" b
-/**
- * Copyright 2004-present Facebook. All Rights Reserved.
- *
- * @providesModule ${1:`!p snip.rv = snip.basename or 'ModuleName'`}
- */
-
-${2:'use strict';
-
-}$0
-endsnippet
-
 snippet req "require" !b
 const ${1:ModuleName} = require('$1${2}');
 endsnippet
