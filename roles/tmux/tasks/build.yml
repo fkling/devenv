@@ -1,0 +1,48 @@
+- name: Install dependencies
+  yum: name={{ item }}
+  with_items: 
+    - ncurses-devel
+    - automake
+    - libtool
+  become: true
+
+- name: Clone libevents
+  git: repo=https://github.com/libevent/libevent.git
+       depth=1
+       dest="{{ libevent_src }}"
+       update=false
+
+
+- name: Build libevents
+  shell: make clean && ./autogen.sh && ./configure --prefix={{ prefix }} && make -j8 && make install
+  args:
+    chdir: "{{ libevent_src }}"
+    creates: "{{ prefix }}/lib/libevent.a"
+
+- name: Clone tmux
+  git: repo=https://github.com/tmux/tmux.git
+       depth=1
+       dest="{{ tmux_src }}"
+       update=false
+
+- name: Build tmux
+  shell: make clean && ./autogen.sh && ./configure --prefix={{ prefix }} LIBEVENT_LIBS="-L={{ prefix }}/lib/ -levent" LIBEVENT_CFLAGS="-I{{ prefix}}/include/" && make -j8 && make install
+  args:
+    chdir: "{{ tmux_src }}"
+    creates: "{{ prefix }}/bin/tmux"
+
+- name: LD_LIBRARY_PATH includes {{ prefix }}/lib/
+  lineinfile: line="export LD_LIBRARY_PATH={{ prefix }}/lib/"
+              dest={{ansible_env.HOME}}/{{ item }}
+              create=true
+  with_items:
+    - .bashrc.local
+    - .zshrc.local
+
+- name: $PATH includes {{ prefix }}/bin
+  lineinfile: line="export PATH={{ prefix }}/bin/:$PATH"
+              dest={{ansible_env.HOME}}/{{ item }}
+              create=true
+  with_items:
+    - .bashrc.local
+    - .zshrc.local

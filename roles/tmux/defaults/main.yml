@@ -1,0 +1,3 @@
+prefix: "{{ ansible_env.HOME }}/.local/"
+libevent_src: "{{ ansible_env.PWD }}/vendor/libevent/"
+tmux_src: "{{ ansible_env.PWD }}/vendor/tmux/"
