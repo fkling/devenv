@@ -17,13 +17,11 @@
 - name: configure Command-T
   command:
     ruby extconf.rb
-    creates={{ command_t_base }}/ruby/command-t/Makefile
     chdir={{ command_t_base }}/ruby/command-t
 
 - name: compile Command-T
   command:
     make
-    creates={{ command_t_base }}/ruby/command-t/{{ command_t_bundle }}
     chdir={{ command_t_base }}/ruby/command-t
 
 - stat: path={{you_complete_me_base}}
