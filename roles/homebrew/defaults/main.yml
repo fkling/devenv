@@ -17,7 +17,7 @@ casks:
   - bartender
   - daisydisk
   - flux
-  - gpgtools
+  - gpg-suite
   - hammerspoon
   - iterm2
   - marked

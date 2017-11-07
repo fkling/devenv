@@ -14,13 +14,13 @@
   homebrew_tap: "tap={{ item }}"
   with_items: taps
 
-- name: brews
-  homebrew: "name={{ item }}"
-  with_items: brews
-
 - name: casks
   homebrew_cask: "name={{ item }}"
   with_items: casks
+
+- name: brews
+  homebrew: "name={{ item }}"
+  with_items: brews
 
 - name: homebrew | clean up old versions
   command: brew cleanup
