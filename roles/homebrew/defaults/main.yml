@@ -6,6 +6,7 @@ brews:
   - clipper
   - encfs
   - git
+  - gnu-sed
   - node
   - nvm
   - python

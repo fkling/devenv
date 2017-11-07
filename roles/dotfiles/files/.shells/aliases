@@ -15,3 +15,4 @@ alias t=tmux
 alias v=vim
 alias clip="nc localhost 8377"
 alias findwomod='find . -not -path "*/node_modules/*"'
+alias strip_colors='gsed -r "s/\x1B\[[0-9;]*[JKmsu]//g"'
