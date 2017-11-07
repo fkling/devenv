@@ -28,5 +28,5 @@
   register: ycm
 
 - name: install YouCompleteMe
-  command: ./install.sh chdir={{ you_complete_me_base }}
+  command: ./install.py chdir={{ you_complete_me_base }}
   when: ycm.stat.exists == True
