@@ -1,15 +1,20 @@
 local leader = {"cmd", "alt", "ctrl"}
 
-hs.grid.setGrid('8x8');
+hs.grid.setGrid('12x8');
 hs.grid.MARGINX = 0
 hs.grid.MARGINY = 0
 hs.window.animationDuration = 0
 
 local grid = {
-  rightHalf = '4,0 4x8',
-  leftHalf = '0,0 4x8',
-  fullScreen = '0,0 8x8',
-  centered = '1,1 6x6',
+  rightThird = '8,0 4x8',
+  rightHalf = '6,0 6x8',
+  rightTwoThird = '4,0 8x8',
+  leftThird = '0,0 4x8',
+  leftHalf = '0,0 6x8',
+  leftTwoThird = '0,0 8x8',
+  fullScreen = '0,0 12x8',
+  centered = '2,1 8x6',
+  centerThird = '4,0 4x8',
 }
 
 --
@@ -57,18 +62,23 @@ end
 
 -- Align left
 hs.hotkey.bind(leader, "Left", chain({
+  grid.leftThird,
 	grid.leftHalf,
+  grid.leftTwoThird,
 }))
 
 -- Align right
 hs.hotkey.bind(leader, "Right", chain({
+  grid.rightThird,
 	grid.rightHalf,
+  grid.rightTwoThird,
 }))
 
 -- Fullscreen / center
 hs.hotkey.bind(leader, "f", chain({
   grid.fullScreen,
   grid.centered,
+  grid.centerThird,
 }))
 
 -- Hide all
