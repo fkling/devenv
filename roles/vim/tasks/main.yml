@@ -17,12 +17,12 @@
 - name: configure Command-T
   command:
     ruby extconf.rb
-    chdir={{ command_t_base }}/ruby/command-t
+    chdir={{ command_t_base }}/ruby/command-t/ext/command-t
 
 - name: compile Command-T
   command:
     make
-    chdir={{ command_t_base }}/ruby/command-t
+    chdir={{ command_t_base }}/ruby/command-t/ext/command-t
 
 - stat: path={{you_complete_me_base}}
   register: ycm
