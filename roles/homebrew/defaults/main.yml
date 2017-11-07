@@ -2,7 +2,6 @@ taps:
   - caskroom/cask
   - homebrew/fuse
 brews:
-  - brew-cask
   - clipper
   - encfs
   - git
@@ -15,7 +14,6 @@ brews:
   - wget
 casks:
   - alfred
-  - atom
   - bartender
   - daisydisk
   - flux
@@ -24,7 +22,6 @@ casks:
   - iterm2
   - marked
   - monodraw
-  - nvalt
   - osxfuse
   - qlcolorcode
   - qlmarkdown
