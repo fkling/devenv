@@ -4,7 +4,7 @@ Plugin 'gmarik/vundle'
 
 "Coding
 Bundle 'mattn/emmet-vim'
-Plugin 'scrooloose/syntastic'
+Plugin 'w0rp/ale'
 Plugin 'tpope/vim-surround'
 Plugin 'mhinz/vim-signify'
 Plugin 'SirVer/ultisnips'
