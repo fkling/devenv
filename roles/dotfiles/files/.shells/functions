@@ -183,3 +183,8 @@ waiting() {
       ;;
   esac
 }
+
+# serve <dir=.> <port=8000>
+serve() {
+ (cd ${1:-.} && python -m SimpleHTTPServer $2)
+}

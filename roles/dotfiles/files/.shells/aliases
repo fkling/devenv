@@ -10,7 +10,6 @@ alias groot='cd $(git rev-parse --show-toplevel 2> /dev/null || echo -n ".")'
 alias l='ls -lF'
 alias ll='ls -laF'
 alias s=ssh
-alias serve='python -m SimpleHTTPServer' # optional arg: port (defaults to 8000)
 alias t=todo.sh
 alias v=vim
 alias clip="nc localhost 8377"
