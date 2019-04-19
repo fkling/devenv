@@ -118,3 +118,68 @@ regmv()
 command_exists () {
   type "$1" 2> /dev/null ;
 }
+
+## Todo list helpers
+today() {
+  case "$1" in
+    ''|ls)
+      if [ "$#" -gt 0 ]; then
+        shift
+      fi
+      todo.sh ls "$@" -@someday -@waiting
+      ;;
+    *)
+      todo.sh "$@"
+      ;;
+  esac
+}
+
+someday() {
+  case "$1" in
+    add)
+      todo.sh "$@" @someday
+      ;;
+    mv)
+      shift
+      todo.sh append "$1" @someday
+      ;;
+    rm)
+      shift
+      todo.sh rm "$1" @someday
+      ;;
+    ''|ls)
+      if [ "$#" -gt 0 ]; then
+        shift
+      fi
+      todo.sh ls "$@" @someday
+      ;;
+    *)
+      todo.sh "$@"
+      ;;
+  esac
+}
+
+waiting() {
+  case "$1" in
+    add)
+      todo.sh "$@" @waiting
+      ;;
+    mv)
+      shift
+      todo.sh append "$1" @waiting
+      ;;
+    rm)
+      shift
+      todo.sh rm "$1" @waiting
+      ;;
+    ''|ls)
+      if [ "$#" -gt 0 ]; then
+        shift
+      fi
+      todo.sh ls "$@" @waiting
+      ;;
+    *)
+      todo.sh "$@"
+      ;;
+  esac
+}
