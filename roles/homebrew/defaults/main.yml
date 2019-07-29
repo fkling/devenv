@@ -9,6 +9,7 @@ brews:
   - node
   - nvm
   - python
+  - todo-txt
   - tmux
   - vim
   - wget

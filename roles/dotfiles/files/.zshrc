@@ -107,6 +107,11 @@ select-word-style bash # only alphanumeric chars are considered WORDCHARS
 bindkey ' ' magic-space # do history expansion on space
 
 #
+# ls
+#
+export CLICOLOR=1
+
+#
 # Other
 #
 
@@ -118,8 +123,10 @@ source $HOME/.shells/functions
 has_homebrew=$(command -v brew)
 
 if [ -n "$has_homebrew" ]; then
-  export NVM_DIR=~/.nvm
-  source $(brew --prefix nvm)/nvm.sh
+  if [ -f $(brew --prefix nvm)/nvm.sh ]; then
+    export NVM_DIR=~/.nvm
+    source $(brew --prefix nvm)/nvm.sh
+  fi
 elif [ -f ~/.nvm/nvm.sh ]; then
   export NVM_DIR=~/.nvm
   source ~/.nvm/nvm.sh
